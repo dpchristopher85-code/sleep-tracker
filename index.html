@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Talk Recorder</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --card: #1e1e1e;
+      --text: #e0e0e0;
+      --accent: #3b82f6;
+      --danger: #ef4444;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card {
+      background: var(--card);
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    button {
+      width: 100%;
+      padding: 0.85rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: var(--accent);
+      color: white;
+      transition: background 0.2s;
+    }
+    button.recording {
+      background-color: var(--danger);
+    }
+    .control-group {
+      margin-top: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    .meter-container {
+      width: 100%;
+      height: 12px;
+      background: #333;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .meter-bar {
+      height: 100%;
+      width: 0%;
+      background: #10b981;
+      transition: width 0.1s ease;
+    }
+    .clip-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .clip-item {
+      background: #2a2a2a;
+      padding: 0.75rem;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .clip-info {
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+    audio {
+      width: 100%;
+      height: 36px;
+    }
+    .clip-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .clip-actions button {
+      padding: 0.4rem;
+      font-size: 0.8rem;
+    }
+    .btn-delete {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sleep Recorder</h1>
+
+    <div class="card">
+      <button id="toggleBtn">Start Night Monitoring</button>
+      
+      <div class="control-group">
+        <label for="threshold">Sensitivity Threshold: <span id="thresholdVal">15</span>%</label>
+        <input type="range" id="threshold" min="1" max="50" value="15">
+      </div>
+
+      <div class="control-group">
+        <label>Live Room Sound Level:</label>
+        <div class="meter-container">
+          <div id="meterBar" class="meter-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Recorded Clips</h2>
+      <div id="clipList" class="clip-list">
+        <p id="emptyMsg" style="color: #888;">No clips recorded yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
